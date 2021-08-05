@@ -1,0 +1,10 @@
+<ul class="watchlistMovies">
+  <li *ngFor="let watchlistMovie of watchlistMovies$ | async"
+      [class.selected]="watchlistMovie.id === selectedId">
+    <a [routerLink]="[watchlistMovie.id]">
+      {{ watchlistMovie.name }}
+      {{watchlistMovie.id}}
+    </a>
+  </li>
+</ul>
+<router-outlet></router-outlet>

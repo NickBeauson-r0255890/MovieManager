@@ -1,0 +1,27 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.0'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'com'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'  //Default JPA implementation is Hibernate, includes JDBC
+	 			// Hibernate will create db schemas based on your entities
+	 	// can be stopped by : spring.jpa.hibernate.ddl-auto=none in application.properties -> manual schemas with schema.sql  file in resources
+	 	//https://stackoverflow.com/questions/38040572/spring-boot-loading-initial-data
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	runtimeOnly 'com.h2database:h2'		//Lightweight database (can write to file)
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+	useJUnitPlatform()
+}

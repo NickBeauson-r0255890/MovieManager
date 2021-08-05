@@ -1,0 +1,45 @@
+<div class="mt-1" id="search-component">
+  <div class="d-flex flex-column flex-md-row align-items-md-center">
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="search-box">Search:</label>
+      <div class="col-sm-10">
+        <input class="ml-1 form-control" #searchBox id="search-box" autocomplete="off" (input)="search(searchBox.value)"/>
+      </div>
+    </div>
+    <ng-container *ngIf="loading">
+      <p class="ml-3">Loading, please wait...</p>
+    </ng-container>
+
+  </div>
+
+  <!-- On input (input) execute search(term)
+    Every time the user types in the textbox, the binding calls search() with the textbox value,
+    a "search term". The searchTerms becomes an Observable emitting a steady stream of search terms.
+-->
+
+
+  <div [hidden]="!term && movies$" class="mt-1table-responsive">
+    <table class="table table-striped table-dark table-hover">
+      <thead class="thead-light">
+      <th scope="col">Name</th>
+      <th scope="col">Duration</th>
+      <th scope="col">Genre</th>
+      </thead>
+      <tbody>
+
+      <tr *ngFor="let movie of movies$ | async" routerLink="/detail/{{movie.id}}">
+        <td>{{movie.name}}</td>
+        <td>{{movie.duration}}</td>
+        <td>{{movie.genre1}}{{movie.genre2? ', ' +
+          (movie.genre2 | lowercase) : ''}}{{movie.genre3? ', ' + (movie.genre3 | lowercase) : ''}}
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- https://nils-mehlhorn.de/posts/angular-file-download-progress -->
+  <!-- https://nils-mehlhorn.de/posts/indicating-loading-the-right-way-in-angular -->
+
+</div>
+
