@@ -9,12 +9,15 @@ import { ControlValueAccessor, NgControl, NG_VALUE_ACCESSOR } from '@angular/for
 export class CustomInputComponent implements ControlValueAccessor {
 /*https://ritchiejacobs.be/angular-custom-form-component*/
 
+  @Input() formControlName: string = '';
   @Input() label: string = 'label';
   @Input() placeholder: string = '';
   @Input() type: 'text' | 'number' | 'password' = 'text';
+  @Input() required = false;
 
   disabled = false;
   value: any= ' ';
+  control!:any;
 
   constructor(
     @Self()       //Decorator - retrieve the dependency only from the local injector, not from parents
@@ -22,6 +25,13 @@ export class CustomInputComponent implements ControlValueAccessor {
     private ngControl: NgControl  //Used to bind to FormControl object to the DOM element
   ) { if(this.ngControl){
         this.ngControl.valueAccessor = this;
+    }
+  }
+
+  ngAfterContentInit(): void {
+    this.control = this.ngControl && this.ngControl.control;
+    if(this.control){
+      console.log(this.control);
     }
   }
 

@@ -1,0 +1,16 @@
+<ng-container *ngIf="control && control?.invalid && control?.touched">
+
+    <p class="alert alert-danger" *ngIf="control.hasError('required')">
+      {{controlName | titlecase}} is a required field
+    </p>
+    <p class="alert alert-danger" *ngIf="control.hasError('pattern')">
+      Invalid pattern
+    </p>
+    <p class="alert alert-danger" *ngIf="control.hasError('maxlength')">
+      The length is over the max limit
+    </p>
+    <!-- <p *ngFor="let err of control.errors | keyvalue">
+      {{err.key}}
+    </p> -->
+
+</ng-container>
